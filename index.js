@@ -78,3 +78,101 @@ function printNumbers(n) {
   printNumbers(inputNumber);
 
   //-----------------------------------
+//ToDo   Part 2: Thinking Methodically
+//   For the tasks below, use the following data to test your work:
+// [{ id: "42", name: "Bruce", occupation: "Knight", age: "41" },
+//  { id: "48", name: "Barry", occupation: "Runner", age: "25" },
+//  { id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
+//  { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
+//  { id: "7", name: "Bilbo", occupation: "None", age: "111" }]
+// Use callback functions alongside Array methods to accomplish the following:
+
+
+// Map the array to change the “occupation” key to “job” and increment every age by 1.
+// Use the reduce method to calculate the sum of the ages.
+// Then use the result to calculate the average age.
+
+const arrPersonDetails = [{ id: "42", name: "Bruce", occupation: "Knight", age: "41" },
+ { id: "48", name: "Barry", occupation: "Runner", age: "25" },
+ { id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
+ { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
+ { id: "7", name: "Bilbo", occupation: "None", age: "111" }];
+
+ console.log("==================Part2===========================");
+
+//1.     Sort the array by age
+const sortArray = arrPersonDetails.sort((a, b) => (a.age - b.age));
+console.log("Person details sorted by age: ", sortArray);
+
+//---------------------------------------------------------------------
+//2.    Filter the array to remove entries with an age greater than 50.
+const copyArray = [...arrPersonDetails];
+
+const ageLT50 = copyArray.filter((person) => person.age <= 50);
+console.log("Age <= than 50: ", ageLT50)
+
+//-----------------------------------------------------------------------
+
+//3.    Map the array to change the “occupation” key to “job” and increment every age by 1
+console.log("Change the 'occupation key' to 'job' and increment age by 1")
+let updatedPersonDetails = arrPersonDetails.map((person) => 
+         ({...person, job : person.occupation, age : parseInt(person.age) + 1}));
+
+updatedPersonDetails.forEach((person) => delete person.occupation);
+console.log(updatedPersonDetails);
+
+//-------------------------------------------------------------------------
+//4.    Use the reduce method to calculate the sum of the ages.
+// Then use the result to calculate the average age.
+const totalAge = arrPersonDetails.reduce((sum, person) => sum + Number(person.age), 0);
+const averageAge = totalAge / arrPersonDetails.length;
+
+console.log("Total Age: ", totalAge);
+console.log("Average Age: ", averageAge);
+
+//ToDO Part3 -- Thinking Critically
+//------------------------------------------------------------------------
+// Take an object and increment its age field.
+// Take an object, make a copy, and increment the age field of the copy. Return the copy.
+// For each of the functions above, if the object does not yet contain an age field, create one and set it to 0. Also, add (or modify, as appropriate) an updated_at field that stores a Date object with the current time
+
+console.log("======================Part 3===========================");
+console.log("Incrementing age field if exist and same manipulation using copy of an object")
+
+function incrementAge(objPerson)
+{
+    if(!objPerson.age)
+    {
+        objPerson.age = 0;
+    }
+    else
+    {
+        objPerson.age++;
+    }    
+    objPerson.update_at = new Date();
+}
+
+let Person = {firstName: 'Hari', lastName: 'Charan', agefavGame: 'Roblox'};
+incrementAge(Person);
+console.log(Person);
+
+//Manipulating on copy of object
+
+function UpdateCopyObj(objPerson)
+{
+    let copyObjPerson = {...objPerson};
+    if(!copyObjPerson.age)
+    {
+        copyObjPerson.age = 0;        
+    }
+    else
+    {
+        copyObjPerson.age++;
+    }
+    copyObjPerson.update_at = new Date();
+    return copyObjPerson;
+}
+let secondPerson = {name:'Divya', age: 9, favColor: 'Pink', hobby: 'making crafts'};
+console.log(UpdateCopyObj(secondPerson));
+
+//------------------------------------------------------------------------------
